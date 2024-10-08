@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fed8b62532f3184d9ba90639422fe81, type: 3}
+  m_Name: Scales and Triads
+  m_EditorClassIdentifier: 
+  <Speed>k__BackingField: 1
+  <Notes>k__BackingField:
+  - C
+  - D
+  - E
+  - F
+  - G
+  - A
+  - B
+  - A
+  - C
+  - B
+  - A
+  - G
+  - F
+  - E
+  - D
+  <Length>k__BackingField:
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  - -0.5
+  <SpawnTime>k__BackingField:
+  - 1
+  - 1.8
+  - 2.5
+  - 3.2
+  - 4
+  - 4.7
+  - 5.2
+  - 5.9
+  - 6.7
+  - 7.5
+  - 8.3
+  - 9
+  - 9.8
+  - 10.5
+  - 11.2
+  <DemoClip>k__BackingField: {fileID: 8300000, guid: f8eb32acae569dd4da62b2daf83630d7,
+    type: 3}
+  <GameplayClip>k__BackingField: {fileID: 8300000, guid: d309ed7b33453ab4c8c33805484e97bb,
+    type: 3}
