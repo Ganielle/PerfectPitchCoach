@@ -59,6 +59,7 @@ public class NoteSpawner : MonoBehaviour
         {
             if (!scoreShown)
             {
+                nextNoteIndex = 0;
                 scoreShown = true;
                 pitchVisualizer.StopInvoke();
                 scoreTMP.text = CalculatePercentage(score).ToString("n0");
