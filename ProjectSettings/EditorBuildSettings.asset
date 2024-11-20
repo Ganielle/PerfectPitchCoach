@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/001 - ExternalAssets/Examples/Example2.unity
+    path: Assets/000 - PitchPerfect/000 - Scenes/Example2.unity
     guid: 5b28f4945d5633548ad918d44fa2f38f
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
