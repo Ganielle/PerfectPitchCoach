@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "UserData", menuName = "PerfectPitchCoach/User/UserData")]
 public class UserData : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [field: SerializeField] public string Username { get; set; }
+    [field: SerializeField] public string UserToken { get; set; }
 }

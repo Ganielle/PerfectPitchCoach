@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private APIController apiController;
     [SerializeField] private PitchVisualizer pitchVisualizer;
     [SerializeField] private NoteSpawner noteSpawner;
 
@@ -18,6 +21,10 @@ public class GameManager : MonoBehaviour
     [Space]
     [SerializeField] private GameObject controlPanel;
     [SerializeField] private AudioSource gameSource;
+
+    [Space]
+    [SerializeField] private GameObject loadingObj;
+    [SerializeField] private TextMeshProUGUI scoreTMP;
 
     [Header("DEBUGGER")]
     public NoteData noteSelected;
@@ -55,9 +62,29 @@ public class GameManager : MonoBehaviour
 
     public void SelectGame(NoteData data)
     {
+        loadingObj.SetActive(true);
+
         noteSelected = data;
-        controlPanel.SetActive(true);
-        exerciseListObj.SetActive(false);
-        pitchVisualizer.StartInvoke();
+        StartCoroutine(apiController.GetRequest($"/score/getscore?song={data.SongName}", "", false, (response) =>
+        {
+            if (response.ToString() != "")
+                noteSelected.Score = Convert.ToInt32(float.Parse(response.ToString()));
+            else
+                noteSelected.Score = 0;
+
+            scoreTMP.text = $"Highest Score: {noteSelected.Score}";
+            controlPanel.SetActive(true);
+            exerciseListObj.SetActive(false);
+            pitchVisualizer.StartInvoke();
+            loadingObj.SetActive(false);
+        }, () =>
+        {
+            noteSelected.Score = 0;
+            scoreTMP.text = $"Highest Score: {noteSelected.Score}";
+            controlPanel.SetActive(true);
+            exerciseListObj.SetActive(false);
+            pitchVisualizer.StartInvoke();
+            loadingObj.SetActive(false);
+        }));
     }
 }

@@ -7,10 +7,15 @@ public class AudioRecorder : MonoBehaviour
     public AudioSource audioSource;
     public int duration = 8;
 
-    void Start()
+
+    public void StartAudioRecorder()
     {
-        audioSource.clip = Microphone.Start(string.Empty, audioSource.loop, duration, AudioSettings.outputSampleRate);
+        audioSource.clip = Microphone.Start(Microphone.devices[0], audioSource.loop, duration, AudioSettings.outputSampleRate);
         audioSource.Play();
     }
 
+    public void StopAudioRecorder()
+    {
+        audioSource.Stop();
+    }
 }

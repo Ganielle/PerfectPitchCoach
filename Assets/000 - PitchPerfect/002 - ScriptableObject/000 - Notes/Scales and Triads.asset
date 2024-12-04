@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fed8b62532f3184d9ba90639422fe81, type: 3}
   m_Name: Scales and Triads
   m_EditorClassIdentifier: 
+  <SongName>k__BackingField: Scales and Triads
+  <Score>k__BackingField: 0
+  <MaxScore>k__BackingField: 150
   <Speed>k__BackingField: 1
   <Notes>k__BackingField:
   - C

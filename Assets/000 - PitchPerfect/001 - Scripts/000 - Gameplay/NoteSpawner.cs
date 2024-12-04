@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class NoteSpawner : MonoBehaviour
 {
+    public AudioRecorder recorder;
     public PitchVisualizer pitchVisualizer;
     public GameManager gameManager;
     public GameObject notePrefab;
@@ -16,6 +17,11 @@ public class NoteSpawner : MonoBehaviour
     public List<Transform> notes;
     public int score;
     private bool scoreShown = true;
+
+    [Space]
+    [SerializeField] private APIController apiController;
+    [SerializeField] private GameObject loadingObj;
+    [SerializeField] private TextMeshProUGUI controlPanelScoreTMP;
 
     string[] names = {
             "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
@@ -59,11 +65,28 @@ public class NoteSpawner : MonoBehaviour
         {
             if (!scoreShown)
             {
-                nextNoteIndex = 0;
                 scoreShown = true;
+                recorder.StopAudioRecorder();
+                nextNoteIndex = 0;
                 pitchVisualizer.StopInvoke();
-                scoreTMP.text = CalculatePercentage(score).ToString("n0");
-                scoreObj.SetActive(true);
+
+                StartCoroutine(apiController.PostRequest("/score/savescore", "", new Dictionary<string, object>
+                {
+                    { "song",  gameManager.noteSelected.SongName },
+                    { "score", CalculatePercentage(score) }
+                }, false, (response) =>
+                {
+                    gameManager.noteSelected.Score = (int)CalculatePercentage(score);
+                    scoreTMP.text = CalculatePercentage(score).ToString("n0");
+                    scoreObj.SetActive(true);
+                    controlPanelScoreTMP.text = $"Highest Score: {(int)CalculatePercentage(score)}";
+                }, () =>
+                {
+                    gameManager.noteSelected.Score = (int)CalculatePercentage(score);
+                    scoreTMP.text = CalculatePercentage(score).ToString("n0");
+                    scoreObj.SetActive(true);
+                    controlPanelScoreTMP.text = $"Highest Score: {(int)CalculatePercentage(score)}";
+                }));
             }
         }
     }
