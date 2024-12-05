@@ -45,20 +45,25 @@ public class LoginController : MonoBehaviour
             noBgLoader.SetActive(false);
             return;
         }
-
+        Debug.Log("starting login api");
         StartCoroutine(LoginAPI());
     }
 
     IEnumerator LoginAPI()
     {
+        Debug.Log("start login");
         UnityWebRequest apiRquest = UnityWebRequest.Get($"{apiController.url}/auth/login?username={usernameTMP.text}&password={passwordTMP.text}");
         apiRquest.SetRequestHeader("Content-Type", "application/json");
 
+        Debug.Log("start login");
         yield return apiRquest.SendWebRequest();
+
+        Debug.Log(apiRquest.downloadHandler.text);
 
         if (apiRquest.result == UnityWebRequest.Result.Success)
         {
             string response = apiRquest.downloadHandler.text;
+
 
             if (response[0] == '{' && response[response.Length - 1] == '}')
             {
@@ -82,16 +87,19 @@ public class LoginController : MonoBehaviour
                         {
                             Debug.Log(apiresponse["data"].ToString());
                             notificationController.ShowError(apiresponse["data"].ToString(), null);
+                            noBgLoader.SetActive(false);
 
                             yield break;
                         }
                         notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                        noBgLoader.SetActive(false);
                         yield break;
                     }
 
                     if (!apiresponse.ContainsKey("data"))
                     {
                         notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                        noBgLoader.SetActive(false);
                         yield break;
                     }
 
@@ -159,7 +167,7 @@ public class LoginController : MonoBehaviour
             noBgLoader.SetActive(false);
             return;
         }
-
+        Debug.Log("helloooo");
         StartCoroutine(apiController.PostRequest("/users/createuser", "", new Dictionary<string, object>
         {
             { "username", usernameRegisterTMP.text },
@@ -170,6 +178,6 @@ public class LoginController : MonoBehaviour
             passwordRegisterTMP.text = "";
 
             notificationController.ShowError("You have successfully registered your account!", null);
-        }, null));
+        }, null, false));
     }
 }

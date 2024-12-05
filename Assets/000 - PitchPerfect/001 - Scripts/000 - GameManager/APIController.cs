@@ -134,12 +134,15 @@ public class APIController : MonoBehaviour
                 {
                     Dictionary<string, object> apiresponse = JsonConvert.DeserializeObject<Dictionary<string, object>>(response);
 
+                    Debug.Log(response);
+
 
                     if (!apiresponse.ContainsKey("message"))
                     {
                         //  ERROR PANEL HERE
                         Debug.Log("Error API CALL! Error Code: " + response);
                         notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                        noBGLoding.SetActive(false);
 
                         errorAction?.Invoke();
                         yield break;
@@ -157,6 +160,7 @@ public class APIController : MonoBehaviour
                         }
                         Debug.Log($"Error API CALL! Error Code: {apiresponse["data"]}");
                         notificationController.ShowError($"{apiresponse["data"]}", () => errorAction?.Invoke());
+                        noBGLoding.SetActive(false);
                         yield break;
                     }
                     if (apiresponse.ContainsKey("data"))
@@ -200,14 +204,17 @@ public class APIController : MonoBehaviour
                 {
                     case 400:
                         notificationController.ShowError($"{apiresponse["data"]}", null);
+                        noBGLoding.SetActive(false);
                         errorAction?.Invoke();
                         break;
                     case 300:
                         notificationController.ShowError($"{apiresponse["data"]}", null);
+                        noBGLoding.SetActive(false);
                         errorAction?.Invoke();
                         break;
                     case 301:
                         notificationController.ShowError($"{apiresponse["data"]}", null);
+                        noBGLoding.SetActive(false);
                         errorAction?.Invoke();
                         break;
                 }
@@ -216,6 +223,7 @@ public class APIController : MonoBehaviour
             {
                 Debug.Log("Error API CALL! Error Code: " + apiRquest.result + ", " + apiRquest.downloadHandler.text);
                 notificationController.ShowError("There's a problem with your internet connection! Please check your connection and try again.", null);
+                noBGLoding.SetActive(false);
                 errorAction?.Invoke();
             }
         }
