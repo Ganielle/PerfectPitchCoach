@@ -12,7 +12,7 @@ public class NoteSpawner : MonoBehaviour
     public GameObject scoreObj;
     public AudioSource audioSource;
     public TextMeshProUGUI scoreTMP;
-    private int nextNoteIndex = 0;
+    public int nextNoteIndex = 0;
 
     public List<Transform> notes;
     public int score;
@@ -51,7 +51,8 @@ public class NoteSpawner : MonoBehaviour
     private void SpawnNotes()
     {
         // Check if the audio is playing and there are notes to spawn
-        if (audioSource.isPlaying && nextNoteIndex < gameManager.noteSelected.Length.Count)
+        Debug.Log((nextNoteIndex < gameManager.noteSelected.SpawnTime.Count) + "   " + nextNoteIndex + "  " + gameManager.noteSelected.SpawnTime.Count);
+        if (audioSource.isPlaying && nextNoteIndex < gameManager.noteSelected.SpawnTime.Count)
         {
             scoreShown = false;
             // If the current time of the audio source is greater than or equal to the next note time
@@ -97,8 +98,17 @@ public class NoteSpawner : MonoBehaviour
         GameObject newNote = Instantiate(notePrefab, new Vector3(0, -5, 0), Quaternion.identity);
 
         Note note = newNote.GetComponent<Note>();
+        float timeDifference = nextNoteIndex >= gameManager.noteSelected.SpawnTime.Count - 1
+        ? -1 // Default value when at the last note
+        : gameManager.noteSelected.SpawnTime[nextNoteIndex] - gameManager.noteSelected.SpawnTime[nextNoteIndex + 1];
+
         // Set additional properties on the note if needed
-        note.SetData(gameManager.noteSelected.Length[nextNoteIndex], notePositions[gameManager.noteSelected.Notes[nextNoteIndex]], gameManager.noteSelected.Speed, this);
+        note.SetData(
+            timeDifference,
+            notePositions[gameManager.noteSelected.Notes[nextNoteIndex]],
+            gameManager.noteSelected.Speed,
+            this
+        );
     }
 
     public float CalculatePercentage(float value)

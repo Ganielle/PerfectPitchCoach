@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fed8b62532f3184d9ba90639422fe81, type: 3}
-  m_Name: Scales and Triads
+  m_Name: Arpeggio Alto
   m_EditorClassIdentifier: 
-  <SongName>k__BackingField: Scales and Triads
+  <SongName>k__BackingField: Arpeggio
   <Score>k__BackingField: 0
   <MaxScore>k__BackingField: 150
-  <Speed>k__BackingField: 1.2
+  <Speed>k__BackingField: 1.5
   <Notes>k__BackingField:
   - C
   - D
@@ -32,39 +32,26 @@ MonoBehaviour:
   - F
   - E
   - D
-  <Length>k__BackingField:
-  - -0.8
-  - -0.6
-  - -0.7
-  - -0.8
-  - -0.7
-  - -0.5
-  - -0.7
-  - -0.8
-  - -0.8
-  - -0.8
-  - -0.7
-  - -0.8
-  - -0.7
-  - -0.7
-  - -1
+  <Length>k__BackingField: []
   <SpawnTime>k__BackingField:
-  - 1
-  - 1.8
-  - 2.5
-  - 3.2
-  - 4
-  - 4.7
-  - 5.2
-  - 5.9
-  - 6.7
-  - 7.5
-  - 8.3
-  - 9
-  - 9.8
-  - 10.5
-  - 11.2
-  <DemoClip>k__BackingField: {fileID: 8300000, guid: f8eb32acae569dd4da62b2daf83630d7,
+  - 0
+  - 0.33
+  - 0.61
+  - 0.89
+  - 1.14
+  - 1.69
+  - 1.97
+  - 2.24
+  - 2.51
+  - 2.78
+  - 3.06
+  - 3.32
+  - 4.42
+  - 5.51
+  - 5.83
+  - 6.41
+  - 6.79
+  <DemoClip>k__BackingField: {fileID: 8300000, guid: d571f44e107efce4788775af696d69a8,
     type: 3}
-  <GameplayClip>k__BackingField: {fileID: 8300000, guid: d309ed7b33453ab4c8c33805484e97bb,
+  <GameplayClip>k__BackingField: {fileID: 8300000, guid: d571f44e107efce4788775af696d69a8,
     type: 3}

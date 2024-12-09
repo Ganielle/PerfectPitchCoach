@@ -22,11 +22,12 @@ public class Note : MonoBehaviour
         }
     }
 
-    public void SetData(float length, float xPos, float speed, NoteSpawner noteSpawner)
+    public void SetData(float duration, float xPos, float speed, NoteSpawner noteSpawner)
     {
         this.noteSpawner = noteSpawner;
         this.xPos = xPos;
         this.speed = speed;
+        float length = speed * duration;
         lineRenderer = GetComponent<LineRenderer>();
         Vector3 startPosition = new Vector3(0, 0, 0); // Starting position
         Vector3 endPosition = new Vector3(0, length, 0); // Length is added to the Y position
