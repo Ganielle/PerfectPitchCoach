@@ -51,7 +51,6 @@ public class NoteSpawner : MonoBehaviour
     private void SpawnNotes()
     {
         // Check if the audio is playing and there are notes to spawn
-        Debug.Log((nextNoteIndex < gameManager.noteSelected.SpawnTime.Count) + "   " + nextNoteIndex + "  " + gameManager.noteSelected.SpawnTime.Count);
         if (audioSource.isPlaying && nextNoteIndex < gameManager.noteSelected.SpawnTime.Count)
         {
             scoreShown = false;
@@ -94,15 +93,25 @@ public class NoteSpawner : MonoBehaviour
 
     private void SpawnNote()
     {
+        // Calculate time difference between the current note and the next
+        float timeDifference = nextNoteIndex >= gameManager.noteSelected.SpawnTime.Count - 1
+            ? -1 // Default value when at the last note
+            : gameManager.noteSelected.SpawnTime[nextNoteIndex + 1] - gameManager.noteSelected.SpawnTime[nextNoteIndex];
+
+        // If the time difference exceeds a threshold, do not spawn a connecting note
+        float maxAllowedGap = 0.5f; // Adjust this value based on the allowed gap duration
+        if (timeDifference > maxAllowedGap && nextNoteIndex < gameManager.noteSelected.SpawnTime.Count - 1)
+        {
+            nextNoteIndex++; // Skip the note and move to the next one
+            return;
+        }
+
         // Instantiate the note at a predefined position
         GameObject newNote = Instantiate(notePrefab, new Vector3(0, -5, 0), Quaternion.identity);
 
         Note note = newNote.GetComponent<Note>();
-        float timeDifference = nextNoteIndex >= gameManager.noteSelected.SpawnTime.Count - 1
-        ? -1 // Default value when at the last note
-        : gameManager.noteSelected.SpawnTime[nextNoteIndex] - gameManager.noteSelected.SpawnTime[nextNoteIndex + 1];
 
-        // Set additional properties on the note if needed
+        // Set note properties
         note.SetData(
             timeDifference,
             notePositions[gameManager.noteSelected.Notes[nextNoteIndex]],
@@ -110,6 +119,7 @@ public class NoteSpawner : MonoBehaviour
             this
         );
     }
+
 
     public float CalculatePercentage(float value)
     {
