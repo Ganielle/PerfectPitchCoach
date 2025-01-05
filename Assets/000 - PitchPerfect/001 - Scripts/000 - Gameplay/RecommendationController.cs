@@ -17,6 +17,10 @@ public class RecommendationController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI recommendationTMP;
     [SerializeField] private GameObject recommendationObj;
 
+    [Space]
+    [SerializeField] private TMP_InputField preAssessmentQuestionTMP;
+    [SerializeField] private TextMeshProUGUI preAssessmentAnswerTMP;
+
     public void ShowRecommendation()
     {
         loadingObj.SetActive(true);
@@ -35,6 +39,28 @@ public class RecommendationController : MonoBehaviour
                 else
                 {
                     recommendationTMP.text = "No data yet!";
+                }
+            }
+        }, null));
+    }
+
+    public void ShowPreAssessment()
+    {
+        loadingObj.SetActive(true);
+
+        StartCoroutine(apiController.GetRequest($"/ai/preassessment", $"?question={preAssessmentQuestionTMP.text}&songname={gameManager.noteSelected.SongName}", false, (response) =>
+        {
+            if (response.ToString() != "")
+            {
+                Recommendation recommendation = JsonConvert.DeserializeObject<Recommendation>(response.ToString());
+
+                if (recommendation != null)
+                {
+                    preAssessmentAnswerTMP.text = recommendation.content;
+                }
+                else
+                {
+                    preAssessmentAnswerTMP.text = "No data yet!";
                 }
             }
         }, null));

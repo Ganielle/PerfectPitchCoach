@@ -108,9 +108,31 @@ public class LoginController : MonoBehaviour
                     userData.UserToken = dataresponse["token"].ToString();
                     userData.Username = usernameTMP.text;
 
-                    noBgLoader.SetActive(false);
-                    exerciseListObj.SetActive(true);
-                    loginObj.SetActive(false);
+
+                    Debug.Log("starting getting songs");
+                    StartCoroutine(apiController.GetRequest("/users/getsongs", "", false, (tempdata) =>
+                    {
+                        Debug.Log("entered song api");
+                        if (tempdata != null)
+                        {
+                            Debug.Log("song response api not null");
+                            userData.SongUnlocked = JsonConvert.DeserializeObject<Dictionary<string, SongUnlock>>(tempdata.ToString());
+
+                            Debug.Log("done deserialize");
+                            exerciseListObj.SetActive(true);
+                            loginObj.SetActive(false);
+                        }
+                        else
+                        {
+                            Debug.Log("Failed to get songs" + "  tempdata: " + tempdata);
+                            notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                        }
+                    }, () =>
+                    {
+                        Debug.Log("Failed to get songs on error");
+                        notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                    }));
+
                 }
                 catch (Exception ex)
                 {

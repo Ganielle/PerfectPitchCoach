@@ -6,6 +6,7 @@ using UnityEngine;
 public class NoteData : ScriptableObject
 {
     [field: SerializeField] public string SongName { get; private set; }
+    [field: SerializeField] public bool Inverted { get; private set; }
     [field: SerializeField] public int Score { get; set; }
     [field: SerializeField] public int MaxScore { get; set; }
     [field: SerializeField] public float Speed { get; private set; }

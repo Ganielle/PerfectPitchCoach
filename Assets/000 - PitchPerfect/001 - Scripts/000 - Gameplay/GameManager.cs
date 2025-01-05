@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,10 @@ public class GameManager : MonoBehaviour
     [Space]
     [SerializeField] private GameObject loadingObj;
     [SerializeField] private TextMeshProUGUI scoreTMP;
+
+    [Space]
+    [SerializeField] private GameObject historyObj;
+    [SerializeField] private TextMeshProUGUI historyTMP;
 
     [Header("DEBUGGER")]
     public NoteData noteSelected;
@@ -87,4 +92,47 @@ public class GameManager : MonoBehaviour
             loadingObj.SetActive(false);
         }));
     }
+
+    public void GetScoreHistory()
+    {
+        loadingObj.SetActive(true);
+
+        StartCoroutine(apiController.GetRequest($"/score/getscorehistory", "", false, (response) =>
+        {
+            if (response != null)
+            {
+                List<ScoreHistory> scoreHistoryData = JsonConvert.DeserializeObject<List<ScoreHistory>>(response.ToString());
+
+                if (scoreHistoryData.Count <= 0)
+                {
+                    historyTMP.text = "No Data yet";
+                }
+                else
+                {
+                    for (int a = 0; a < scoreHistoryData.Count; a++)
+                    {
+                        historyTMP.text += $"Score: {scoreHistoryData[a].amount:n0}  Date: {scoreHistoryData[a].createdAt}\n\n";
+                    }
+                }
+            }
+            else
+            {
+                historyTMP.text = "No Data yet";
+            }
+
+            historyObj.SetActive(true);
+        }, () =>
+        {
+            historyTMP.text = "No Data yet";
+            historyObj.SetActive(true);
+            loadingObj.SetActive(false);
+        }));
+    }
+}
+
+[System.Serializable]
+public class ScoreHistory
+{
+    public string amount;
+    public string createdAt;
 }

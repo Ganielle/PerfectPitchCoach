@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Scales and Triads
   m_EditorClassIdentifier: 
   <SongName>k__BackingField: Scales and Triads
+  <Inverted>k__BackingField: 1
   <Score>k__BackingField: 0
   <MaxScore>k__BackingField: 150
   <Speed>k__BackingField: 1.2

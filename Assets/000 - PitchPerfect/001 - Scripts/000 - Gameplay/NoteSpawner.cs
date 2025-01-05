@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class NoteSpawner : MonoBehaviour
 {
+    public UserData userData;
     public AudioRecorder recorder;
     public PitchVisualizer pitchVisualizer;
     public GameManager gameManager;
@@ -79,12 +80,59 @@ public class NoteSpawner : MonoBehaviour
                     gameManager.noteSelected.Score = (int)CalculatePercentage(score);
                     scoreTMP.text = CalculatePercentage(score).ToString("n0");
                     scoreObj.SetActive(true);
+
+                    string songtounlock = "";
+
+                    switch (gameManager.noteSelected.SongName)
+                    {
+                        case "Scales and Triads":
+                            songtounlock = "Arpeggio";
+                        break;
+                        case "Arpeggio":
+                            songtounlock = "Circular 5th Major";
+                        break;
+                        case "Circular 5th Major":
+                            songtounlock = "Circular 9th Major";
+                        break;
+                        case "Circular 9th Major":
+                            songtounlock = "Looper 1";
+                        break;
+                        case "Looper 1":
+                            songtounlock = "Looper 2";
+                        break;
+                    }
+
+                    if (songtounlock != "")
+                        userData.SongUnlocked[songtounlock].locked = 0;
                     controlPanelScoreTMP.text = $"Highest Score: {(int)CalculatePercentage(score)}";
                 }, () =>
                 {
                     gameManager.noteSelected.Score = (int)CalculatePercentage(score);
                     scoreTMP.text = CalculatePercentage(score).ToString("n0");
                     scoreObj.SetActive(true);
+                    string songtounlock = "";
+
+                    switch (gameManager.noteSelected.SongName)
+                    {
+                        case "Scales and Triads":
+                            songtounlock = "Arpeggio";
+                            break;
+                        case "Arpeggio":
+                            songtounlock = "Circular 5th Major";
+                            break;
+                        case "Circular 5th Major":
+                            songtounlock = "Circular 9th Major";
+                            break;
+                        case "Circular 9th Major":
+                            songtounlock = "Looper 1";
+                            break;
+                        case "Looper 1":
+                            songtounlock = "Looper 2";
+                            break;
+                    }
+
+                    if (songtounlock != "")
+                        userData.SongUnlocked[songtounlock].locked = 0;
                     controlPanelScoreTMP.text = $"Highest Score: {(int)CalculatePercentage(score)}";
                 }));
             }
@@ -96,7 +144,7 @@ public class NoteSpawner : MonoBehaviour
         // Calculate time difference between the current note and the next
         float timeDifference = nextNoteIndex >= gameManager.noteSelected.SpawnTime.Count - 1
             ? -1 // Default value when at the last note
-            : gameManager.noteSelected.SpawnTime[nextNoteIndex + 1] - gameManager.noteSelected.SpawnTime[nextNoteIndex];
+            : gameManager.noteSelected.Inverted ? gameManager.noteSelected.SpawnTime[nextNoteIndex] - gameManager.noteSelected.SpawnTime[nextNoteIndex + 1] : gameManager.noteSelected.SpawnTime[nextNoteIndex + 1] - gameManager.noteSelected.SpawnTime[nextNoteIndex];
 
         // If the time difference exceeds a threshold, do not spawn a connecting note
         float maxAllowedGap = 0.5f; // Adjust this value based on the allowed gap duration
