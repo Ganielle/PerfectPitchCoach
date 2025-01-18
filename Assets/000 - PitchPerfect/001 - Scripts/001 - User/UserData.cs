@@ -12,6 +12,8 @@ public class UserData : ScriptableObject
 
     public Dictionary<string, SongUnlock> SongUnlocked;
 
+    [field: SerializeField] public List<UploadedSong> UploadSongs { get; set; }
+
     //  =======================
 
     private void OnEnable()
@@ -19,6 +21,7 @@ public class UserData : ScriptableObject
         Username = "";
         UserToken = "";
         SongUnlocked = new Dictionary<string, SongUnlock>();
+        UploadSongs = new List<UploadedSong>();
     }
 }
 
@@ -28,4 +31,20 @@ public class SongUnlock
     public string _id;
     public string owner;
     public int locked;
+}
+
+[System.Serializable]
+public class UploadedSong
+{
+    public string _id;
+    public string owner;
+    public string songname;
+    public string songfile;
+    public List<UploadedSongNotes> notes;
+}
+
+[System.Serializable]
+public class UploadedSongNotes
+{
+    public string notevalue;
 }

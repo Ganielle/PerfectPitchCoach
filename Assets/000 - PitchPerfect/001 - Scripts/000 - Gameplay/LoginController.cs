@@ -119,8 +119,28 @@ public class LoginController : MonoBehaviour
                             userData.SongUnlocked = JsonConvert.DeserializeObject<Dictionary<string, SongUnlock>>(tempdata.ToString());
 
                             Debug.Log("done deserialize");
-                            exerciseListObj.SetActive(true);
-                            loginObj.SetActive(false);
+
+                            StartCoroutine(apiController.GetRequest("/song/getuploadedsongs", "", false, (tempdatasong) =>
+                            {
+                                Debug.Log("ENTERED GET UPLOADED SONGS API");
+
+                                if (tempdatasong != null)
+                                {
+                                    userData.UploadSongs = JsonConvert.DeserializeObject<List<UploadedSong>>(tempdatasong.ToString());
+
+                                    exerciseListObj.SetActive(true);
+                                    loginObj.SetActive(false);
+                                }
+                                else
+                                {
+                                    Debug.Log("Failed to get uploaded songs" + "  tempdatasong: " + tempdata);
+                                    notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                                }
+                            }, () =>
+                            {
+                                Debug.Log("Failed to get songs on error");
+                                notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                            }));
                         }
                         else
                         {
