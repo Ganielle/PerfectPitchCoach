@@ -2,12 +2,14 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class LoginController : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private UserData userData;
     [SerializeField] private APIController apiController;
     [SerializeField] private NotificationController notificationController;
@@ -26,6 +28,12 @@ public class LoginController : MonoBehaviour
     [Header("REGISTER")]
     [SerializeField] private TMP_InputField usernameRegisterTMP;
     [SerializeField] private TMP_InputField passwordRegisterTMP;
+
+    [Space]
+    [SerializeField] private Transform uploadedSongParent;
+    [SerializeField] private GameObject noSongsYetUpload;
+    [SerializeField] private GameObject songUploadedListObj;
+    [SerializeField] private GameObject songUploadedItem;
 
     //public void 
 
@@ -128,8 +136,22 @@ public class LoginController : MonoBehaviour
                                 {
                                     userData.UploadSongs = JsonConvert.DeserializeObject<List<UploadedSong>>(tempdatasong.ToString());
 
-                                    exerciseListObj.SetActive(true);
-                                    loginObj.SetActive(false);
+                                    if (userData.UploadSongs.Count > 0)
+                                    {
+                                        InitializeUploadedSongs();
+
+                                        songUploadedListObj.SetActive(true);
+                                        noSongsYetUpload.SetActive(false);
+                                    }
+                                    else
+                                    {
+                                        songUploadedListObj.SetActive(false);
+                                        noSongsYetUpload.SetActive(true);
+
+                                        exerciseListObj.SetActive(true);
+                                        loginObj.SetActive(false);
+                                        noBgLoader.SetActive(false);
+                                    }
                                 }
                                 else
                                 {
@@ -191,6 +213,22 @@ public class LoginController : MonoBehaviour
                 noBgLoader.SetActive(false);
             }
         }
+    }
+
+    private async void InitializeUploadedSongs()
+    {
+        for (int a = 0; a < userData.UploadSongs.Count; a++)
+        {
+            GameObject tempuploadsongs = Instantiate(songUploadedItem, uploadedSongParent);
+
+            tempuploadsongs.GetComponent<SongUploadItem>().InitializeSong(userData.UploadSongs[a].songname, userData.UploadSongs[a].songfile, a, gameManager);
+
+            await Task.Yield();
+        }
+
+        exerciseListObj.SetActive(true);
+        loginObj.SetActive(false);
+        noBgLoader.SetActive(false);
     }
 
     public void Register()

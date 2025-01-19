@@ -2,12 +2,35 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private event EventHandler UploadedSongChange;
+    public event EventHandler OnUploadedSongChange
+    {
+        add
+        {
+            if (UploadedSongChange == null || !UploadedSongChange.GetInvocationList().Contains(value))
+                UploadedSongChange += value;
+        }
+        remove { UploadedSongChange -= value; }
+    }
+    public SongUploadItem SelectedUploadedSong
+    {
+        get => uploadedSongSelected;
+        set
+        {
+            uploadedSongSelected = value;
+            UploadedSongChange?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    //  ======================
+
     [SerializeField] private APIController apiController;
     [SerializeField] private PitchVisualizer pitchVisualizer;
     [SerializeField] private NoteSpawner noteSpawner;
@@ -33,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     [Header("DEBUGGER")]
     public NoteData noteSelected;
+    [SerializeField] private SongUploadItem uploadedSongSelected;
 
     private void Update()
     {

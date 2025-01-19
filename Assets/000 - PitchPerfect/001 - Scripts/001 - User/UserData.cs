@@ -40,11 +40,19 @@ public class UploadedSong
     public string owner;
     public string songname;
     public string songfile;
+    public float speed;
     public List<UploadedSongNotes> notes;
+    public List<UploadedSongNoteLetters> noteletter;
 }
 
 [System.Serializable]
 public class UploadedSongNotes
 {
     public string notevalue;
+}
+
+[System.Serializable]
+public class UploadedSongNoteLetters
+{
+    public string notelettervalue;
 }
