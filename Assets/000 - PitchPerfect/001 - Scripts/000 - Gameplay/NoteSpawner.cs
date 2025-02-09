@@ -87,22 +87,49 @@ public class NoteSpawner : MonoBehaviour
 
                         string songtounlock = "";
 
+                        float tempscoretounlock = 0;
+
                         switch (gameManager.noteSelected.SongName)
                         {
                             case "Scales and Triads":
-                                songtounlock = "Arpeggio";
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Arpeggio";
+
                                 break;
                             case "Arpeggio":
-                                songtounlock = "Circular 5th Major";
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Circular 5th Major";
+
                                 break;
                             case "Circular 5th Major":
-                                songtounlock = "Circular 9th Major";
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Circular 9th Major";
                                 break;
                             case "Circular 9th Major":
-                                songtounlock = "Looper 1";
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Looper 1";
                                 break;
                             case "Looper 1":
-                                songtounlock = "Looper 2";
+
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Looper 2";
+                                break;
+                            case "Looper 2":
+
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.75f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    userData.FinalAssessment = 1;
                                 break;
                         }
 
@@ -115,23 +142,49 @@ public class NoteSpawner : MonoBehaviour
                         scoreTMP.text = CalculatePercentage(score).ToString("n0");
                         scoreObj.SetActive(true);
                         string songtounlock = "";
+                        float tempscoretounlock = 0;
 
                         switch (gameManager.noteSelected.SongName)
                         {
                             case "Scales and Triads":
-                                songtounlock = "Arpeggio";
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Arpeggio";
+
                                 break;
                             case "Arpeggio":
-                                songtounlock = "Circular 5th Major";
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Circular 5th Major";
+
                                 break;
                             case "Circular 5th Major":
-                                songtounlock = "Circular 9th Major";
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Circular 9th Major";
                                 break;
                             case "Circular 9th Major":
-                                songtounlock = "Looper 1";
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Looper 1";
                                 break;
                             case "Looper 1":
-                                songtounlock = "Looper 2";
+
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.5f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    songtounlock = "Looper 2";
+                                break;
+                            case "Looper 2":
+
+                                tempscoretounlock = gameManager.noteSelected.MaxScore * 0.75f;
+
+                                if ((int)CalculatePercentage(score) >= tempscoretounlock)
+                                    userData.FinalAssessment = 1;
                                 break;
                         }
 

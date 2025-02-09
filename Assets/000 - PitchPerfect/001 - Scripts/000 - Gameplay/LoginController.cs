@@ -148,15 +148,27 @@ public class LoginController : MonoBehaviour
                                         songUploadedListObj.SetActive(false);
                                         noSongsYetUpload.SetActive(true);
 
-                                        exerciseListObj.SetActive(true);
-                                        loginObj.SetActive(false);
-                                        noBgLoader.SetActive(false);
+                                        StartCoroutine(apiController.GetRequest("/users/getfinalassessmentstats", "", false, (tempstats) =>
+                                        {
+                                            userData.FinalAssessment = tempstats == null ? 0 : Convert.ToInt32(tempstats.ToString());
+
+                                            exerciseListObj.SetActive(true);
+                                            loginObj.SetActive(false);
+                                            noBgLoader.SetActive(false);
+
+                                        }, () =>
+                                        {
+                                            Debug.Log("Failed to get final assessment stats" + "  tempdatasong: " + tempdata);
+                                            notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                                            noBgLoader.SetActive(false);
+                                        }));
                                     }
                                 }
                                 else
                                 {
                                     Debug.Log("Failed to get uploaded songs" + "  tempdatasong: " + tempdata);
                                     notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                                    noBgLoader.SetActive(false);
                                 }
                             }, () =>
                             {
@@ -168,11 +180,13 @@ public class LoginController : MonoBehaviour
                         {
                             Debug.Log("Failed to get songs" + "  tempdata: " + tempdata);
                             notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                            noBgLoader.SetActive(false);
                         }
                     }, () =>
                     {
                         Debug.Log("Failed to get songs on error");
                         notificationController.ShowError("There's a problem with the server! Please try again later.", null);
+                        noBgLoader.SetActive(false);
                     }));
 
                 }

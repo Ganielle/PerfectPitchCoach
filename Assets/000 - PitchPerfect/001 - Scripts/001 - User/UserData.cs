@@ -7,6 +7,7 @@ public class UserData : ScriptableObject
 {
     [field: SerializeField] public string Username { get; set; }
     [field: SerializeField] public string UserToken { get; set; }
+    [field: SerializeField] public int FinalAssessment { get; set; }
 
     //  =======================
 
