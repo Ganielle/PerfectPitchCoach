@@ -8,6 +8,7 @@ public class SongUploadItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI songName;
 
     [Header("DEBUGGER")]
+    public string songid;
     public string songname;
     public string songlink;
     public int index;
@@ -19,8 +20,9 @@ public class SongUploadItem : MonoBehaviour
 
     //  ==================
 
-    public void InitializeSong(string songname, string link, int index, GameManager gameManager)
+    public void InitializeSong(string songid, string songname, string link, int index, GameManager gameManager)
     {
+        this.songid = songid;
         songName.text = songname;
         this.songname = songname;
         songlink = link;

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Looper 1
   m_EditorClassIdentifier: 
   <SongName>k__BackingField: Looper 1
+  <Inverted>k__BackingField: 0
   <Score>k__BackingField: 0
-  <MaxScore>k__BackingField: 200
+  <MaxScore>k__BackingField: 150
   <Speed>k__BackingField: 1.8
   <Notes>k__BackingField:
   - C
@@ -215,7 +216,7 @@ MonoBehaviour:
   - 25.33
   - 25.56
   - 25.77
-  <DemoClip>k__BackingField: {fileID: 8300000, guid: 8a76c573e3424fd40a6bcbed7eba89f3,
+  <DemoClip>k__BackingField: {fileID: 8300000, guid: d6762284a6f061941a1a2f4e5b7ccfe5,
     type: 3}
-  <GameplayClip>k__BackingField: {fileID: 8300000, guid: 8a76c573e3424fd40a6bcbed7eba89f3,
+  <GameplayClip>k__BackingField: {fileID: 8300000, guid: d6762284a6f061941a1a2f4e5b7ccfe5,
     type: 3}

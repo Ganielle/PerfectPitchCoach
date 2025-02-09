@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
     {
         loadingObj.SetActive(true);
 
-        StartCoroutine(apiController.GetRequest($"/score/getscorehistory", "", false, (response) =>
+        StartCoroutine(apiController.GetRequest($"/score/getscorehistory", $"?songname={noteSelected.SongName}", false, (response) =>
         {
             if (response != null)
             {

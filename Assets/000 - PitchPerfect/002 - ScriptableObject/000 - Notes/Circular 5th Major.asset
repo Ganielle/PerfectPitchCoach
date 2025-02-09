@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Circular 5th Major
   m_EditorClassIdentifier: 
   <SongName>k__BackingField: Circular 5th Major
+  <Inverted>k__BackingField: 0
   <Score>k__BackingField: 0
   <MaxScore>k__BackingField: 150
   <Speed>k__BackingField: 1.8
@@ -169,7 +170,7 @@ MonoBehaviour:
   - 20.22
   - 20.46
   - 20.69
-  <DemoClip>k__BackingField: {fileID: 8300000, guid: 5d10f2f8334c76146a3ecbbfbf1a82da,
+  <DemoClip>k__BackingField: {fileID: 8300000, guid: 82ac325c39f218c48980d7d950c1c272,
     type: 3}
-  <GameplayClip>k__BackingField: {fileID: 8300000, guid: 5d10f2f8334c76146a3ecbbfbf1a82da,
+  <GameplayClip>k__BackingField: {fileID: 8300000, guid: 82ac325c39f218c48980d7d950c1c272,
     type: 3}

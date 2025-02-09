@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Arpeggio
   m_EditorClassIdentifier: 
   <SongName>k__BackingField: Arpeggio
+  <Inverted>k__BackingField: 0
   <Score>k__BackingField: 0
-  <MaxScore>k__BackingField: 300
+  <MaxScore>k__BackingField: 150
   <Speed>k__BackingField: 1.8
   <Notes>k__BackingField:
   - C
@@ -97,7 +98,7 @@ MonoBehaviour:
   - 13.68
   - 13.97
   - 14.29
-  <DemoClip>k__BackingField: {fileID: 8300000, guid: d571f44e107efce4788775af696d69a8,
+  <DemoClip>k__BackingField: {fileID: 8300000, guid: 53a877c5148efc240805bac013cbab72,
     type: 3}
-  <GameplayClip>k__BackingField: {fileID: 8300000, guid: d571f44e107efce4788775af696d69a8,
+  <GameplayClip>k__BackingField: {fileID: 8300000, guid: 53a877c5148efc240805bac013cbab72,
     type: 3}

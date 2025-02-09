@@ -235,7 +235,7 @@ public class LoginController : MonoBehaviour
         {
             GameObject tempuploadsongs = Instantiate(songUploadedItem, uploadedSongParent);
 
-            tempuploadsongs.GetComponent<SongUploadItem>().InitializeSong(userData.UploadSongs[a].songname, userData.UploadSongs[a].songfile, a, gameManager);
+            tempuploadsongs.GetComponent<SongUploadItem>().InitializeSong(userData.UploadSongs[a]._id,userData.UploadSongs[a].songname, userData.UploadSongs[a].songfile, a, gameManager);
 
             await Task.Yield();
         }
